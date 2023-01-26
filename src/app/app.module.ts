@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FeatureFlagGuard, FeatureFlagService } from './routes/feature.guard';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    FeatureFlagGuard,
+    FeatureFlagService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

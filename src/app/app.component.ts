@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FeatureFlagService } from './routes/feature.guard';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-feature-flag-route';
+  title = 'Feature Flag Protected Lazy-Loading Route';
+  secretPageDisabled = true;
+
+  constructor(private features: FeatureFlagService) {}
+
+  toggleSecretPage() {
+    this.secretPageDisabled = !this.secretPageDisabled;
+
+    if (this.secretPageDisabled) {
+      this.features.disable('secret-page-enabled');
+    } else {
+      this.features.enable('secret-page-enabled');
+    }
+  }
 }
